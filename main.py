@@ -20,6 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     cli_parser.add_argument("--view-points", type=int, default=10)
     cli_parser.add_argument("--view-interval", type=int, default=60)
     cli_parser.add_argument("--active-window", type=int, default=180)
+    cli_parser.add_argument("--like-multiplier", type=int, default=1)
     cli_parser.add_argument("--gift-multiplier", type=int, default=1)
     cli_parser.add_argument("--save-every", type=int, default=15)
 
@@ -33,6 +34,7 @@ def build_config_from_args(args: argparse.Namespace) -> TrackerConfig:
         view_points=args.view_points,
         view_interval=args.view_interval,
         active_window=args.active_window,
+        like_multiplier=args.like_multiplier,
         gift_multiplier=args.gift_multiplier,
         save_every=args.save_every,
     )

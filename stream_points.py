@@ -13,6 +13,7 @@ try:
         CommentEvent,
         ConnectEvent,
         DisconnectEvent,
+        DiggEvent,
         FollowEvent,
         GiftEvent,
         JoinEvent,
@@ -22,7 +23,7 @@ try:
     TIKTOKLIVE_IMPORT_ERROR: Optional[ModuleNotFoundError] = None
 except ModuleNotFoundError as exc:
     TikTokLiveClient = None  # type: ignore[assignment]
-    CommentEvent = ConnectEvent = DisconnectEvent = FollowEvent = GiftEvent = object  # type: ignore[assignment]
+    CommentEvent = ConnectEvent = DiggEvent = DisconnectEvent = FollowEvent = GiftEvent = object  # type: ignore[assignment]
     JoinEvent = LikeEvent = ShareEvent = object  # type: ignore[assignment]
     TIKTOKLIVE_IMPORT_ERROR = exc
 
@@ -30,6 +31,8 @@ except ModuleNotFoundError as exc:
 LogCallback = Callable[[str], None]
 StatusCallback = Callable[[str], None]
 ScoreboardCallback = Callable[[list["ViewerPoints"]], None]
+RequestCallback = Callable[[str], None]
+CommandCallback = Callable[[dict[str, object]], None]
 
 
 def timestamp() -> str:
@@ -45,9 +48,12 @@ class ViewerPoints:
     unique_id: str
     nickname: str
     total_points: int = 0
+    manual_points: int = 0
     watch_points: int = 0
+    like_points: int = 0
     gift_points: int = 0
     watch_intervals: int = 0
+    like_count: int = 0
     gift_count: int = 0
     gift_diamonds: int = 0
     first_seen_at: str = ""
@@ -62,6 +68,7 @@ class TrackerConfig:
     view_points: int = 10
     view_interval: int = 60
     active_window: int = 180
+    like_multiplier: int = 1
     gift_multiplier: int = 1
     save_every: int = 15
     top_n: int = 10
@@ -80,6 +87,8 @@ class TrackerCallbacks:
     on_log: Optional[LogCallback] = None
     on_status: Optional[StatusCallback] = None
     on_scoreboard: Optional[ScoreboardCallback] = None
+    on_request: Optional[RequestCallback] = None
+    on_command: Optional[CommandCallback] = None
 
 
 class PointLedger:
@@ -113,6 +122,22 @@ class PointLedger:
             key=lambda viewer: viewer.total_points,
             reverse=True,
         )[:limit]
+
+    def get_viewer_points(self, unique_id: str) -> int:
+        viewer = self.viewers.get(unique_id)
+        if viewer is None:
+            return 0
+        return viewer.total_points
+
+    def adjust_viewer_points(self, unique_id: str, new_total: int) -> ViewerPoints:
+        viewer = self.viewers.get(unique_id)
+        if viewer is None:
+            raise KeyError(unique_id)
+
+        delta = new_total - viewer.total_points
+        viewer.manual_points += delta
+        viewer.total_points = new_total
+        return viewer
 
     def ensure_viewer(
         self,
@@ -200,6 +225,23 @@ class PointLedger:
         viewer.total_points += awarded_points
         return viewer
 
+    def award_like_points(
+        self,
+        unique_id: str,
+        nickname: str,
+        like_count: int,
+        like_multiplier: int,
+        seen_at: datetime,
+    ) -> ViewerPoints:
+        viewer = self.mark_active(unique_id, nickname, seen_at)
+        total_likes = max(like_count, 1)
+        awarded_points = total_likes * like_multiplier
+
+        viewer.like_count += total_likes
+        viewer.like_points += awarded_points
+        viewer.total_points += awarded_points
+        return viewer
+
 
 @dataclass
 class TrackerState:
@@ -249,6 +291,25 @@ def get_gift_diamond_count(event: GiftEvent) -> int:
             return int(candidate)
 
     return 0
+
+
+def get_like_count(event: LikeEvent) -> int:
+    candidates = [
+        getattr(event, "like_count", None),
+        getattr(event, "count", None),
+        getattr(event, "digg_count", None),
+        getattr(event, "total", None),
+        getattr(event, "likes", None),
+        getattr(event, "likeCount", None),
+    ]
+
+    for candidate in candidates:
+        if isinstance(candidate, int):
+            return max(candidate, 1)
+        if isinstance(candidate, str) and candidate.isdigit():
+            return max(int(candidate), 1)
+
+    return 1
 
 
 def should_count_gift(event: GiftEvent) -> bool:
@@ -310,6 +371,7 @@ class StreamPointsTracker:
         self.client = None
         self.stop_event = asyncio.Event()
         self.state = TrackerState(tracked_user_count=len(self.ledger.viewers))
+        self.requests_enabled_at: Optional[datetime] = None
 
     def log(self, message: str) -> None:
         if self.callbacks.on_log is not None:
@@ -326,6 +388,14 @@ class StreamPointsTracker:
         self.state.tracked_user_count = len(self.ledger.viewers)
         if self.callbacks.on_scoreboard is not None:
             self.callbacks.on_scoreboard(self.ledger.top_viewers(self.config.top_n))
+
+    def publish_request(self, message: str) -> None:
+        if self.callbacks.on_request is not None:
+            self.callbacks.on_request(message)
+
+    def publish_command(self, payload: dict[str, object]) -> None:
+        if self.callbacks.on_command is not None:
+            self.callbacks.on_command(payload)
 
     def save_ledger(self) -> None:
         self.ledger.save()
@@ -386,10 +456,37 @@ class StreamPointsTracker:
         if self.client is None:
             raise RuntimeError("Tracker client is not initialized.")
 
+        async def handle_like_event(event: Any, event_name: str) -> None:
+            unique_id, nickname = get_user_identity(event)
+            like_count = get_like_count(event)
+
+            if unique_id is None or nickname is None:
+                self.log(
+                    f"[{timestamp()}] {event_name} received without viewer identity "
+                    f"(count={like_count}). TikTok may be reporting desktop/live likes as "
+                    "aggregate reactions instead of per-user events."
+                )
+                return
+
+            viewer = self.ledger.award_like_points(
+                unique_id=unique_id,
+                nickname=nickname,
+                like_count=like_count,
+                like_multiplier=self.config.like_multiplier,
+                seen_at=utc_now(),
+            )
+            awarded_points = like_count * self.config.like_multiplier
+            self.log(
+                f"[{timestamp()}] {event_name}: @{viewer.unique_id} sent "
+                f"{like_count} likes | +{awarded_points} points | total={viewer.total_points}"
+            )
+            self.publish_scoreboard()
+
         @self.client.on(ConnectEvent)
         async def on_connect(event: ConnectEvent) -> None:
             self.state.connected = True
             self.state.room_id = self.client.room_id
+            self.requests_enabled_at = utc_now() + timedelta(seconds=3)
             self.set_status("Connected")
             self.log(
                 f"[{timestamp()}] Connected to @{event.unique_id} | room_id={self.client.room_id}"
@@ -422,10 +519,15 @@ class StreamPointsTracker:
         @self.client.on(CommentEvent)
         async def on_comment(event: CommentEvent) -> None:
             await self.mark_event_active(event)
+            await self.handle_comment_request(event)
 
         @self.client.on(LikeEvent)
         async def on_like(event: LikeEvent) -> None:
-            await self.mark_event_active(event)
+            await handle_like_event(event, "LikeEvent")
+
+        @self.client.on(DiggEvent)
+        async def on_digg(event: DiggEvent) -> None:
+            await handle_like_event(event, "DiggEvent")
 
         @self.client.on(FollowEvent)
         async def on_follow(event: FollowEvent) -> None:
@@ -470,6 +572,45 @@ class StreamPointsTracker:
 
         self.ledger.mark_active(unique_id, nickname, utc_now())
 
+    async def handle_comment_request(self, event: CommentEvent) -> None:
+        if self.requests_enabled_at is not None and utc_now() < self.requests_enabled_at:
+            return
+
+        comment = getattr(event, "comment", "")
+        if not isinstance(comment, str):
+            return
+
+        command = comment.strip().lower()
+        unique_id, nickname = get_user_identity(event)
+        if unique_id is None or nickname is None:
+            return
+
+        viewer = self.ledger.mark_active(unique_id, nickname, utc_now())
+        self.publish_scoreboard()
+
+        if command == "!showpoints":
+            self.publish_request(f"@{viewer.unique_id}: {viewer.total_points} points")
+            return
+
+        if command == "!closewindow":
+            self.publish_command(
+                {
+                    "command": command,
+                    "unique_id": viewer.unique_id,
+                    "cost": 10,
+                }
+            )
+            return
+
+        if command == "!closeallwindows":
+            self.publish_command(
+                {
+                    "command": command,
+                    "unique_id": viewer.unique_id,
+                    "cost": 50,
+                }
+            )
+
     def print_summary(self) -> None:
         top_viewers = self.ledger.top_viewers(self.config.top_n)
         if top_viewers:
@@ -477,7 +618,8 @@ class StreamPointsTracker:
             for viewer in top_viewers:
                 self.log(
                     f"  @{viewer.unique_id} | total={viewer.total_points} "
-                    f"| watch={viewer.watch_points} | gift={viewer.gift_points}"
+                    f"| watch={viewer.watch_points} | likes={viewer.like_points} "
+                    f"| gift={viewer.gift_points}"
                 )
         else:
             self.log(f"[{timestamp()}] No viewers were tracked.")
@@ -521,6 +663,12 @@ def parse_args() -> argparse.Namespace:
         help="Seconds a viewer stays eligible after their last visible activity",
     )
     parser.add_argument(
+        "--like-multiplier",
+        type=int,
+        default=1,
+        help="Points awarded per stream like",
+    )
+    parser.add_argument(
         "--gift-multiplier",
         type=int,
         default=1,
@@ -542,6 +690,7 @@ def build_config_from_args(args: argparse.Namespace) -> TrackerConfig:
         view_points=args.view_points,
         view_interval=args.view_interval,
         active_window=args.active_window,
+        like_multiplier=args.like_multiplier,
         gift_multiplier=args.gift_multiplier,
         save_every=args.save_every,
     )
