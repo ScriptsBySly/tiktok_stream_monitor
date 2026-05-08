@@ -33,8 +33,9 @@ ALL_CONTROLLED_ITEMS = REWARD_ITEMS + SPAM_ITEMS
 
 
 class OBSGroupTogglerApp:
-    def __init__(self, parent):
+    def __init__(self, parent, connection_parent=None):
         self.parent = parent
+        self.connection_parent = connection_parent or parent
 
         self.client = None
 
@@ -52,7 +53,10 @@ class OBSGroupTogglerApp:
         main = ttk.Frame(self.parent, padding=12)
         main.pack(fill="both", expand=True)
 
-        conn_frame = ttk.LabelFrame(main, text="OBS Connection", padding=10)
+        connection_main = ttk.Frame(self.connection_parent, padding=12)
+        connection_main.pack(fill="x")
+
+        conn_frame = ttk.LabelFrame(connection_main, text="OBS Connection", padding=10)
         conn_frame.pack(fill="x", pady=(0, 10))
 
         ttk.Label(conn_frame, text="Host").grid(row=0, column=0, sticky="w", padx=(0, 8), pady=4)
@@ -68,7 +72,7 @@ class OBSGroupTogglerApp:
             row=0, column=2, rowspan=3, padx=(12, 0), sticky="ns"
         )
 
-        status_frame = ttk.LabelFrame(main, text="Status", padding=10)
+        status_frame = ttk.LabelFrame(connection_main, text="OBS Status", padding=10)
         status_frame.pack(fill="x", pady=(0, 10))
 
         ttk.Label(status_frame, textvariable=self.status_var).pack(anchor="w")
@@ -155,6 +159,18 @@ class OBSGroupTogglerApp:
             self.set_controls_state("disabled")
             self.reset_item_indicators()
             messagebox.showerror("Connection Error", f"Could not connect to OBS.\n\n{e}")
+
+    def get_settings(self):
+        return {
+            "host": self.host_var.get(),
+            "port": self.port_var.get(),
+            "password": self.password_var.get(),
+        }
+
+    def apply_settings(self, payload):
+        self.host_var.set(str(payload.get("host", "localhost")))
+        self.port_var.set(str(payload.get("port", "4455")))
+        self.password_var.set(str(payload.get("password", "")))
 
     def get_current_scene_name(self):
         if not self.client:

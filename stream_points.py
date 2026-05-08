@@ -33,6 +33,7 @@ StatusCallback = Callable[[str], None]
 ScoreboardCallback = Callable[[list["ViewerPoints"]], None]
 RequestCallback = Callable[[str], None]
 CommandCallback = Callable[[dict[str, object]], None]
+NotificationCallback = Callable[[dict[str, object]], None]
 
 
 def timestamp() -> str:
@@ -92,6 +93,7 @@ class TrackerCallbacks:
     on_scoreboard: Optional[ScoreboardCallback] = None
     on_request: Optional[RequestCallback] = None
     on_command: Optional[CommandCallback] = None
+    on_notification: Optional[NotificationCallback] = None
 
 
 class PointLedger:
@@ -315,6 +317,24 @@ def get_gift_diamond_count(event: GiftEvent) -> int:
     return 0
 
 
+def get_gift_name(event: GiftEvent) -> str:
+    gift = getattr(event, "gift", None)
+    if gift is None:
+        return "unknown gift"
+
+    candidates = [
+        getattr(gift, "name", None),
+        getattr(getattr(gift, "info", None), "name", None),
+        getattr(getattr(gift, "extended_gift", None), "name", None),
+    ]
+
+    for candidate in candidates:
+        if isinstance(candidate, str) and candidate.strip():
+            return candidate.strip()
+
+    return "unknown gift"
+
+
 def get_like_count(event: LikeEvent) -> int:
     candidates = [
         getattr(event, "like_count", None),
@@ -418,6 +438,10 @@ class StreamPointsTracker:
     def publish_command(self, payload: dict[str, object]) -> None:
         if self.callbacks.on_command is not None:
             self.callbacks.on_command(payload)
+
+    def publish_notification(self, payload: dict[str, object]) -> None:
+        if self.callbacks.on_notification is not None:
+            self.callbacks.on_notification(payload)
 
     def save_ledger(self) -> None:
         self.ledger.save()
@@ -556,6 +580,15 @@ class StreamPointsTracker:
         @self.client.on(FollowEvent)
         async def on_follow(event: FollowEvent) -> None:
             await self.mark_event_active(event)
+            unique_id, nickname = get_user_identity(event)
+            if unique_id is not None:
+                self.publish_notification(
+                    {
+                        "type": "Follower",
+                        "unique_id": unique_id,
+                        "nickname": nickname or unique_id,
+                    }
+                )
 
         @self.client.on(ShareEvent)
         async def on_share(event: ShareEvent) -> None:
@@ -580,15 +613,27 @@ class StreamPointsTracker:
             if not should_count_gift(event):
                 return
 
+            unique_id, nickname = get_user_identity(event)
+            repeat_count = get_gift_repeat_count(event)
+            gift_name = get_gift_name(event)
+            if unique_id is not None:
+                self.publish_notification(
+                    {
+                        "type": "Gift",
+                        "unique_id": unique_id,
+                        "nickname": nickname or unique_id,
+                        "gift_name": gift_name,
+                        "repeat_count": repeat_count,
+                    }
+                )
+
             if self.config.gift_multiplier <= 0:
                 await self.mark_event_active(event)
                 return
 
-            unique_id, nickname = get_user_identity(event)
             if unique_id is None or nickname is None:
                 return
 
-            repeat_count = get_gift_repeat_count(event)
             diamonds = get_gift_diamond_count(event)
             viewer = self.ledger.award_gift_points(
                 unique_id=unique_id,
@@ -599,7 +644,6 @@ class StreamPointsTracker:
                 seen_at=utc_now(),
             )
 
-            gift_name = getattr(getattr(event, "gift", None), "name", "unknown gift")
             awarded_points = diamonds * repeat_count * self.config.gift_multiplier
             self.log(
                 f"[{timestamp()}] Gift tracked: @{viewer.unique_id} sent "
