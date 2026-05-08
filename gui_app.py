@@ -35,8 +35,8 @@ class TrackerGui:
         self.view_points_var = tk.StringVar(value="10")
         self.view_interval_var = tk.StringVar(value="60")
         self.active_window_var = tk.StringVar(value="180")
-        self.like_multiplier_var = tk.StringVar(value="1")
-        self.gift_multiplier_var = tk.StringVar(value="1")
+        self.like_multiplier_var = tk.StringVar(value="10")
+        self.gift_multiplier_var = tk.StringVar(value="0")
         self.save_every_var = tk.StringVar(value="15")
         self.status_var = tk.StringVar(value="Idle")
 
@@ -49,7 +49,7 @@ class TrackerGui:
     def build_requests_window(self) -> tk.Toplevel:
         window = tk.Toplevel(self.root)
         window.title("Stream Requests")
-        window.geometry("720x240")
+        window.geometry("432x240")
         window.transient(self.root)
         window.columnconfigure(0, weight=1)
         window.rowconfigure(0, weight=1)
@@ -78,7 +78,7 @@ class TrackerGui:
     def build_commands_window(self) -> tk.Toplevel:
         window = tk.Toplevel(self.root)
         window.title("Stream Commands")
-        window.geometry("720x250")
+        window.geometry("432x275")
         window.transient(self.root)
         window.columnconfigure(0, weight=1)
         window.rowconfigure(0, weight=1)
@@ -135,7 +135,7 @@ class TrackerGui:
             row=2, column=1, sticky="ew", padx=4, pady=4
         )
 
-        ttk.Label(controls, text="Like Multiplier").grid(
+        ttk.Label(controls, text="Likes Per Point").grid(
             row=2, column=2, sticky="w", padx=4, pady=4
         )
         ttk.Entry(controls, textvariable=self.like_multiplier_var).grid(
@@ -296,20 +296,27 @@ class TrackerGui:
 
     def populate_commands_text(self) -> None:
         lines = [
-            "How to gain points:",
-            "- Stay active in the stream to",
-            "earn watch points over time.",
-            "- Send gifts to earn gift points.",
+            "Points:",
+            "1 point per minute watched",
+            "1 point per 10 likes",
+            "25 points per share",
+            "Gifts: no points right now",
             "",
-            "Available commands:",
+            "Commands:",
             "!showpoints",
-            "See your current points total.",
+            "Check your points",
             "",
             "!closewindow - 10 points",
-            "Redeem to close one window.",
+            "Close 1 window",
             "",
             "!closeallwindows - 50 points",
-            "Redeem to close all windows.",
+            "Close all windows",
+            "",
+            "!spawm - 10 points",
+            "Show 1 SPAM window",
+            "",
+            "!spawmall - 50 points",
+            "Show all SPAM windows",
         ]
         self.commands_text.configure(state="normal")
         self.commands_text.delete("1.0", "end")
@@ -414,6 +421,17 @@ class TrackerGui:
 
         return value
 
+    def parse_non_negative_int(self, raw_value: str, field_name: str) -> int:
+        try:
+            value = int(raw_value)
+        except ValueError as exc:
+            raise ValueError(f"{field_name} must be a whole number.") from exc
+
+        if value < 0:
+            raise ValueError(f"{field_name} must be 0 or greater.")
+
+        return value
+
     def build_config(self) -> TrackerConfig:
         username = self.username_var.get().strip()
         if not username:
@@ -425,10 +443,10 @@ class TrackerGui:
             view_points=self.parse_positive_int(self.view_points_var.get(), "View Points"),
             view_interval=self.parse_positive_int(self.view_interval_var.get(), "View Interval"),
             active_window=self.parse_positive_int(self.active_window_var.get(), "Active Window"),
-            like_multiplier=self.parse_positive_int(
+            likes_per_point=self.parse_positive_int(
                 self.like_multiplier_var.get(), "Like Multiplier"
             ),
-            gift_multiplier=self.parse_positive_int(
+            gift_multiplier=self.parse_non_negative_int(
                 self.gift_multiplier_var.get(), "Gift Multiplier"
             ),
             save_every=self.parse_positive_int(self.save_every_var.get(), "Save Every"),
@@ -539,11 +557,17 @@ class TrackerGui:
             self.append_request(f"@{viewer.unique_id}: OBS is not connected for {command}")
             return
 
+        redeemer_name = viewer.nickname or viewer.unique_id
+
         try:
             if command == "!closewindow":
                 success, obs_message = self.obs_app.hide_random_reward_action()
             elif command == "!closeallwindows":
                 success, obs_message, _ = self.obs_app.hide_all_reward_action()
+            elif command in {"!spam", "!spawm"}:
+                success, obs_message = self.obs_app.show_random_spam_action(redeemer_name)
+            elif command in {"!spamall", "!spawmall"}:
+                success, obs_message, _ = self.obs_app.show_all_spam_action(redeemer_name)
             else:
                 return
         except Exception as error:

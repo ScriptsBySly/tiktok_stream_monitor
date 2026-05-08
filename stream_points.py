@@ -52,10 +52,12 @@ class ViewerPoints:
     watch_points: int = 0
     like_points: int = 0
     gift_points: int = 0
+    share_points: int = 0
     watch_intervals: int = 0
     like_count: int = 0
     gift_count: int = 0
     gift_diamonds: int = 0
+    share_count: int = 0
     first_seen_at: str = ""
     last_seen_at: str = ""
     last_point_award_at: str = ""
@@ -65,11 +67,12 @@ class ViewerPoints:
 class TrackerConfig:
     username: str
     points_file: str = "stream_points.json"
-    view_points: int = 10
+    view_points: int = 1
     view_interval: int = 60
     active_window: int = 180
-    like_multiplier: int = 1
-    gift_multiplier: int = 1
+    likes_per_point: int = 10
+    gift_multiplier: int = 0
+    share_points: int = 25
     save_every: int = 15
     top_n: int = 10
 
@@ -230,15 +233,34 @@ class PointLedger:
         unique_id: str,
         nickname: str,
         like_count: int,
-        like_multiplier: int,
+        likes_per_point: int,
         seen_at: datetime,
     ) -> ViewerPoints:
         viewer = self.mark_active(unique_id, nickname, seen_at)
         total_likes = max(like_count, 1)
-        awarded_points = total_likes * like_multiplier
-
+        previous_like_count = viewer.like_count
         viewer.like_count += total_likes
+
+        previous_point_milestone = previous_like_count // likes_per_point
+        current_point_milestone = viewer.like_count // likes_per_point
+        awarded_points = current_point_milestone - previous_point_milestone
+
         viewer.like_points += awarded_points
+        viewer.total_points += awarded_points
+        return viewer
+
+    def award_share_points(
+        self,
+        unique_id: str,
+        nickname: str,
+        points_per_share: int,
+        seen_at: datetime,
+    ) -> ViewerPoints:
+        viewer = self.mark_active(unique_id, nickname, seen_at)
+        awarded_points = max(points_per_share, 0)
+
+        viewer.share_count += 1
+        viewer.share_points += awarded_points
         viewer.total_points += awarded_points
         return viewer
 
@@ -472,13 +494,15 @@ class StreamPointsTracker:
                 unique_id=unique_id,
                 nickname=nickname,
                 like_count=like_count,
-                like_multiplier=self.config.like_multiplier,
+                likes_per_point=self.config.likes_per_point,
                 seen_at=utc_now(),
             )
-            awarded_points = like_count * self.config.like_multiplier
+            awarded_points = viewer.like_count // self.config.likes_per_point
+            previous_points = (viewer.like_count - like_count) // self.config.likes_per_point
+            earned_now = awarded_points - previous_points
             self.log(
                 f"[{timestamp()}] {event_name}: @{viewer.unique_id} sent "
-                f"{like_count} likes | +{awarded_points} points | total={viewer.total_points}"
+                f"{like_count} likes | +{earned_now} points | total={viewer.total_points}"
             )
             self.publish_scoreboard()
 
@@ -535,11 +559,29 @@ class StreamPointsTracker:
 
         @self.client.on(ShareEvent)
         async def on_share(event: ShareEvent) -> None:
-            await self.mark_event_active(event)
+            unique_id, nickname = get_user_identity(event)
+            if unique_id is None or nickname is None:
+                return
+
+            viewer = self.ledger.award_share_points(
+                unique_id=unique_id,
+                nickname=nickname,
+                points_per_share=self.config.share_points,
+                seen_at=utc_now(),
+            )
+            self.log(
+                f"[{timestamp()}] Share tracked: @{viewer.unique_id} shared the live "
+                f"| +{self.config.share_points} points | total={viewer.total_points}"
+            )
+            self.publish_scoreboard()
 
         @self.client.on(GiftEvent)
         async def on_gift(event: GiftEvent) -> None:
             if not should_count_gift(event):
+                return
+
+            if self.config.gift_multiplier <= 0:
+                await self.mark_event_active(event)
                 return
 
             unique_id, nickname = get_user_identity(event)
@@ -610,6 +652,26 @@ class StreamPointsTracker:
                     "cost": 50,
                 }
             )
+            return
+
+        if command == "!spawm":
+            self.publish_command(
+                {
+                    "command": command,
+                    "unique_id": viewer.unique_id,
+                    "cost": 10,
+                }
+            )
+            return
+
+        if command == "!spawmall":
+            self.publish_command(
+                {
+                    "command": command,
+                    "unique_id": viewer.unique_id,
+                    "cost": 50,
+                }
+            )
 
     def print_summary(self) -> None:
         top_viewers = self.ledger.top_viewers(self.config.top_n)
@@ -619,7 +681,7 @@ class StreamPointsTracker:
                 self.log(
                     f"  @{viewer.unique_id} | total={viewer.total_points} "
                     f"| watch={viewer.watch_points} | likes={viewer.like_points} "
-                    f"| gift={viewer.gift_points}"
+                    f"| gift={viewer.gift_points} | share={viewer.share_points}"
                 )
         else:
             self.log(f"[{timestamp()}] No viewers were tracked.")
@@ -633,7 +695,7 @@ class StreamPointsTracker:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Track TikTok LIVE watch-time and gift points."
+        description="Track TikTok LIVE watch-time and stream interaction points."
     )
     parser.add_argument(
         "username",
@@ -665,14 +727,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--like-multiplier",
         type=int,
-        default=1,
-        help="Points awarded per stream like",
+        default=10,
+        help="Number of likes needed to award 1 point",
     )
     parser.add_argument(
         "--gift-multiplier",
         type=int,
-        default=1,
-        help="Points awarded per gift diamond",
+        default=0,
+        help="Points awarded per gift diamond (set to 0 to disable gift points)",
     )
     parser.add_argument(
         "--save-every",
@@ -690,7 +752,7 @@ def build_config_from_args(args: argparse.Namespace) -> TrackerConfig:
         view_points=args.view_points,
         view_interval=args.view_interval,
         active_window=args.active_window,
-        like_multiplier=args.like_multiplier,
+        likes_per_point=args.like_multiplier,
         gift_multiplier=args.gift_multiplier,
         save_every=args.save_every,
     )
