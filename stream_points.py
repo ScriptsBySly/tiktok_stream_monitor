@@ -34,6 +34,7 @@ ScoreboardCallback = Callable[[list["ViewerPoints"]], None]
 RequestCallback = Callable[[str], None]
 CommandCallback = Callable[[dict[str, object]], None]
 NotificationCallback = Callable[[dict[str, object]], None]
+SHARE_REWARD_COOLDOWN_SECONDS = 300
 
 
 def timestamp() -> str:
@@ -62,6 +63,7 @@ class ViewerPoints:
     first_seen_at: str = ""
     last_seen_at: str = ""
     last_point_award_at: str = ""
+    last_share_award_at: str = ""
 
 
 @dataclass
@@ -257,14 +259,23 @@ class PointLedger:
         nickname: str,
         points_per_share: int,
         seen_at: datetime,
-    ) -> ViewerPoints:
+    ) -> tuple[ViewerPoints, int, int]:
         viewer = self.mark_active(unique_id, nickname, seen_at)
+
+        if viewer.last_share_award_at:
+            last_share_award_at = datetime.fromisoformat(viewer.last_share_award_at)
+            elapsed_seconds = int((seen_at - last_share_award_at).total_seconds())
+            if elapsed_seconds < SHARE_REWARD_COOLDOWN_SECONDS:
+                remaining_seconds = SHARE_REWARD_COOLDOWN_SECONDS - elapsed_seconds
+                return viewer, 0, remaining_seconds
+
         awarded_points = max(points_per_share, 0)
 
         viewer.share_count += 1
         viewer.share_points += awarded_points
         viewer.total_points += awarded_points
-        return viewer
+        viewer.last_share_award_at = seen_at.isoformat()
+        return viewer, awarded_points, 0
 
 
 @dataclass
@@ -596,15 +607,24 @@ class StreamPointsTracker:
             if unique_id is None or nickname is None:
                 return
 
-            viewer = self.ledger.award_share_points(
+            viewer, awarded_points, cooldown_remaining = self.ledger.award_share_points(
                 unique_id=unique_id,
                 nickname=nickname,
                 points_per_share=self.config.share_points,
                 seen_at=utc_now(),
             )
+
+            if cooldown_remaining > 0:
+                self.log(
+                    f"[{timestamp()}] Share cooldown: @{viewer.unique_id} shared the live "
+                    f"| no points | cooldown_remaining={cooldown_remaining}s"
+                )
+                self.publish_scoreboard()
+                return
+
             self.log(
                 f"[{timestamp()}] Share tracked: @{viewer.unique_id} shared the live "
-                f"| +{self.config.share_points} points | total={viewer.total_points}"
+                f"| +{awarded_points} points | total={viewer.total_points}"
             )
             self.publish_scoreboard()
 

@@ -1,0 +1,2764 @@
+{
+  "presets": [
+    {
+      "name": "The Finals",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1424.0,
+            "width": 1424.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 596.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 1424.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "\u200b\ufeff\ufeff\u200bTHE\u200b\u200b\u200b\u2005\u200b\u200b\ufeff\u200bF\ufeff\u200bI\ufeff\ufeff\ufeff\u200bN\ufeff\ufeff\ufeffALS:MemorableEmu_d188765a:Discovery.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/The_Finals.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 952.0,
+                "width": 170.94558715820312
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "The Finals"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 2376.0,
+            "width": 2376.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 993.75,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 2375.75
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "\u200b\ufeff\ufeff\u200bTHE\u200b\u200b\u200b\u2005\u200b\u200b\ufeff\u200bF\ufeff\u200bI\ufeff\ufeff\ufeff\u200bN\ufeff\ufeff\ufeffALS:MemorableEmu_d188765a:Discovery.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/The_Finals.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 952.0,
+                "width": 170.94558715820312
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "The Finals"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "The Outlast Trials",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1424.0,
+            "width": 1424.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 596.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 1424.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "The Outlast Trials  :UnrealWindow:TOTClient-Win64-Shipping.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/The_Outlast_Trials.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1654.0,
+                "width": 297.0
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "The Outlast Trials"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 2376.0,
+            "width": 2376.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 993.75,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 2375.75
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "The Outlast Trials  :UnrealWindow:TOTClient-Win64-Shipping.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/The_Outlast_Trials.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1654.0,
+                "width": 297.0
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "The Outlast Trials"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Slay The Spire 2",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1256.0,
+            "width": 1256.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Slay the Spire 2:Engine:SlayTheSpire2.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/SlayTheSpire2.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1524.0,
+                "width": 273.6565856933594
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Slay The Spire 2"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1755.0,
+            "width": 1755.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Slay the Spire 2:Engine:SlayTheSpire2.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/SlayTheSpire2.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1524.0,
+                "width": 273.6565856933594
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Slay The Spire 2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Space Marines 2",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1256.0,
+            "width": 1256.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Warhammer 40,000#3A Space Marine 2 CLIENT 12.3.PATCH.1005963/1010134:Magnus:Warhammer 40000 Space Marine 2 - Retail.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/Warhammer 40000 Space Marine 2.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1434.0,
+                "width": 257.4957580566406
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Space Marine 2"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1755.0,
+            "width": 1755.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Warhammer 40,000#3A Space Marine 2 CLIENT 12.3.PATCH.1005963/1010134:Magnus:Warhammer 40000 Space Marine 2 - Retail.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/Warhammer 40000 Space Marine 2.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1434.0,
+                "width": 257.4957580566406
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Space Marine 2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "The Surge",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1256.0,
+            "width": 1256.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 298.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 720.0,
+                "sourceWidth": 1280.0,
+                "width": 529.8604736328125
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "The Surge (DX11, 64Bit) :FledgeRenderWindowDX11:TheSurge.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/TheSurge.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 962.0,
+                "width": 172.74122619628906
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "The Surge"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1755.0,
+            "width": 1755.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 496.875,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 720.0,
+                "sourceWidth": 1280.0,
+                "width": 884.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "The Surge (DX11, 64Bit) :FledgeRenderWindowDX11:TheSurge.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/TheSurge.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 962.0,
+                "width": 172.74122619628906
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "The Surge"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "GTAV",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1424.0,
+            "width": 1424.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 596.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 1424.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Grand Theft Auto V:sgaWindow:GTA5_Enhanced.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/GTA5_Enhanced.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1814.0,
+                "width": 325.7303466796875
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Grand Theft Auto V"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 2376.0,
+            "width": 2376.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 993.75,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 2375.75
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Grand Theft Auto V:sgaWindow:GTA5_Enhanced.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/GTA5_Enhanced.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1814.0,
+                "width": 325.7303466796875
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Grand Theft Auto V"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Slay The Spire",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1424.0,
+            "width": 1424.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 596.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 1424.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Slay the Spire:LWJGL:javaw.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/SlayTheSpire.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1342.0,
+                "width": 240.97579956054688
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Slay The Spire"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 2376.0,
+            "width": 2376.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 993.75,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 1440.0,
+                "sourceWidth": 3440.0,
+                "width": 2375.75
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Slay the Spire:LWJGL:javaw.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/SlayTheSpire.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 1342.0,
+                "width": 240.97579956054688
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Slay The Spire"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Serious Sam The Second",
+      "sceneName": "OT_Vertical",
+      "version": 2,
+      "items": {
+        "Groupe_game_full": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": true,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -176.0,
+            "positionY": 51.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1256.0,
+            "width": 1256.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 6,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 0.0,
+                "positionY": 85.0,
+                "rotation": 0.0,
+                "scaleX": 0.4139534831047058,
+                "scaleY": 0.4138889014720917,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Serious Sam (Window 2048x1152):SeriousSam:SeriousSam.exe"
+              }
+            },
+            {
+              "sourceName": "Game_Full",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 175.99993896484375,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_full_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 200.999755859375,
+                "positionY": 16.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/SeriousSam.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 272.0000915527344,
+                "positionY": 20.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 3408.0,
+                "width": 611.9564208984375
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Serious Sam: The Second Encounter"
+              }
+            }
+          ]
+        },
+        "Groupe_game_half": {
+          "containerName": "OT_Vertical",
+          "sceneItemEnabled": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 0.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 0.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 1920.0,
+            "positionX": -675.0,
+            "positionY": 78.0001220703125,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 1920.0,
+            "sourceWidth": 1755.0,
+            "width": 1755.0
+          },
+          "sceneItemLocked": true,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemIndex": 5,
+          "groupItems": [
+            {
+              "sourceName": "GAME",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 0.0,
+                "positionY": 87.9998779296875,
+                "rotation": 0.0,
+                "scaleX": 0.690625011920929,
+                "scaleY": 0.6901041865348816,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "undo_uuid": "3eeae3e7-e33a-4f7f-a7c8-0bce7a8a75ab",
+                "window": "Serious Sam (Window 2048x1152):SeriousSam:SeriousSam.exe"
+              }
+            },
+            {
+              "sourceName": "Game_VR",
+              "sceneItemEnabled": false,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 0.0,
+                "positionX": 553.0,
+                "positionY": 84.0,
+                "rotation": 0.0,
+                "scaleX": 1.3076171875,
+                "scaleY": 1.3075916767120361,
+                "sourceHeight": 0.0,
+                "sourceWidth": 0.0,
+                "width": 0.0
+              },
+              "inputKind": "game_capture",
+              "inputSettings": {
+                "capture_mode": "window",
+                "window": "CryodeathVR (64-bit Development PCD3D_SM5) :UnrealWindow:CryoDeath.exe"
+              }
+            },
+            {
+              "sourceName": "Game_half",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 1920.0,
+                "positionX": 675.0,
+                "positionY": 0.0,
+                "rotation": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "sourceHeight": 1920.0,
+                "sourceWidth": 1080.0,
+                "width": 1080.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/TikTok_background/exports/game_half_window.bmp"
+              }
+            },
+            {
+              "sourceName": "Icon_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 54.0,
+                "positionX": 696.0,
+                "positionY": 12.99993896484375,
+                "rotation": 0.0,
+                "scaleX": 1.6875,
+                "scaleY": 1.6875,
+                "sourceHeight": 32.0,
+                "sourceWidth": 32.0,
+                "width": 54.0
+              },
+              "inputKind": "image_source",
+              "inputSettings": {
+                "file": "H:/Projects/OBS/Icons/Games/SeriousSam.png"
+              }
+            },
+            {
+              "sourceName": "text_game",
+              "sceneItemEnabled": true,
+              "sceneItemTransform": {
+                "alignment": 5,
+                "boundsAlignment": 0,
+                "boundsHeight": 0.0,
+                "boundsType": "OBS_BOUNDS_NONE",
+                "boundsWidth": 0.0,
+                "cropBottom": 0,
+                "cropLeft": 0,
+                "cropRight": 0,
+                "cropToBounds": false,
+                "cropTop": 0,
+                "height": 46.0,
+                "positionX": 769.0,
+                "positionY": 16.99981689453125,
+                "rotation": 0.0,
+                "scaleX": 0.1795646846294403,
+                "scaleY": 0.1796875,
+                "sourceHeight": 256.0,
+                "sourceWidth": 3408.0,
+                "width": 611.9564208984375
+              },
+              "inputKind": "text_gdiplus_v3",
+              "inputSettings": {
+                "font": {
+                  "face": "Tahoma",
+                  "flags": 0,
+                  "size": 256,
+                  "style": "Regular"
+                },
+                "text": "Serious Sam: The Second Encounter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

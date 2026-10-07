@@ -8,7 +8,7 @@ from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
 from typing import Optional
 
-from interact_with_obs import OBSGroupTogglerApp
+from interact_with_obs import OBSGroupTogglerApp, OBSWindowPresetApp
 from stream_points import PointLedger, StreamPointsTracker, TrackerCallbacks, TrackerConfig, ViewerPoints
 
 
@@ -171,8 +171,9 @@ class NotificationPanel:
         self.root = root
         self.audio = Mp3Player()
         self.chroma_key_color = "#00ff00"
-        self.popup_images: list[tk.PhotoImage] = []
+        self.notification_image: Optional[tk.PhotoImage] = None
         self.active_popup: Optional[tk.Toplevel] = None
+        self.notification_after_id: Optional[str] = None
         self.notification_queue: list[tuple[str, dict[str, Path], Optional[str], str]] = []
 
         self.duration_seconds = tk.DoubleVar(value=5.0)
@@ -194,7 +195,41 @@ class NotificationPanel:
         }
         self.usernames = {name: tk.StringVar(value="") for name in NOTIFICATIONS}
 
+        self.notification_window = self.build_notification_window()
+        self.notification_canvas = self.build_notification_canvas()
         self.build_ui()
+
+    def build_notification_window(self) -> tk.Toplevel:
+        window = tk.Toplevel(self.root)
+        window.title("Stream_notification")
+        window.configure(bg=self.chroma_key_color)
+        window.resizable(False, False)
+        window.protocol("WM_DELETE_WINDOW", self.hide_notification_window)
+        return window
+
+    def build_notification_canvas(self) -> tk.Canvas:
+        width, height = self.get_default_notification_size()
+        canvas = tk.Canvas(
+            self.notification_window,
+            width=width,
+            height=height,
+            bg=self.chroma_key_color,
+            borderwidth=0,
+            highlightthickness=0,
+        )
+        canvas.pack()
+        return canvas
+
+    def get_default_notification_size(self) -> tuple[int, int]:
+        for assets in NOTIFICATIONS.values():
+            image_path = assets["image"]
+            if image_path.exists():
+                try:
+                    image = tk.PhotoImage(file=image_path)
+                except tk.TclError:
+                    continue
+                return image.width(), image.height()
+        return 800, 450
 
     def build_ui(self) -> None:
         self.parent.columnconfigure(0, weight=1)
@@ -365,24 +400,21 @@ class NotificationPanel:
         except RuntimeError as error:
             messagebox.showerror("Sound Error", f"Could not play {name} sound:\n{error}", parent=self.root)
 
-        popup = tk.Toplevel(self.root)
-        popup.title("Stream_notification")
-        popup.resizable(False, False)
-        popup.configure(bg=self.chroma_key_color)
-        self.active_popup = popup
-
         image = tk.PhotoImage(file=image_path)
-        self.popup_images.append(image)
-        canvas = tk.Canvas(
-            popup,
-            width=image.width(),
-            height=image.height(),
-            bg=self.chroma_key_color,
-            borderwidth=0,
-            highlightthickness=0,
-        )
-        canvas.pack()
-        canvas.create_image(0, 0, anchor="nw", image=image)
+        self.notification_image = image
+        canvas = self.notification_canvas
+        canvas.configure(width=image.width(), height=image.height())
+        canvas.delete("all")
+        canvas.create_image(0, 0, anchor="nw", image=self.notification_image)
+
+        self.notification_window.geometry(f"{image.width()}x{image.height()}")
+        if not self.notification_window.winfo_viewable():
+            self.notification_window.deiconify()
+        self.active_popup = self.notification_window
+
+        if self.notification_after_id is not None:
+            self.notification_window.after_cancel(self.notification_after_id)
+            self.notification_after_id = None
 
         columns, rows = grid_settings
         if self.show_grid.get():
@@ -400,10 +432,9 @@ class NotificationPanel:
             username_override,
         )
         if username_item is not None:
-            self.animate_username_color(popup, canvas, username_item)
+            self.animate_username_color(self.notification_window, canvas, username_item)
 
-        popup.protocol("WM_DELETE_WINDOW", lambda: self.close_popup(popup, image))
-        popup.after(duration_ms, lambda: self.close_popup(popup, image))
+        self.notification_after_id = self.notification_window.after(duration_ms, self.clear_notification)
         return True
 
     def get_duration_ms(self) -> Optional[int]:
@@ -609,6 +640,8 @@ class NotificationPanel:
     ) -> None:
         if not popup.winfo_exists() or not canvas.winfo_exists():
             return
+        if not canvas.find_withtag(username_item):
+            return
         colors = list(USERNAME_COLORS.values())
         canvas.itemconfigure(username_item, fill=colors[color_index % len(colors)])
         popup.after(500, lambda: self.animate_username_color(popup, canvas, username_item, color_index + 1))
@@ -629,18 +662,30 @@ class NotificationPanel:
         bottom = box["end_row"] * cell_height
         return left, top, right, bottom
 
-    def close_popup(self, popup: tk.Toplevel, image: tk.PhotoImage) -> None:
-        popup_was_active = self.active_popup is popup
-        if image in self.popup_images:
-            self.popup_images.remove(image)
-        if popup.winfo_exists():
-            popup.destroy()
-        if popup_was_active:
-            self.active_popup = None
-            self.root.after(50, self.process_notification_queue)
+    def clear_notification(self) -> None:
+        self.notification_after_id = None
+        self.notification_canvas.delete("all")
+        self.notification_image = None
+        self.active_popup = None
+        self.root.after(50, self.process_notification_queue)
+
+    def hide_notification_window(self) -> None:
+        self.clear_queue()
+        if self.notification_after_id is not None:
+            self.notification_window.after_cancel(self.notification_after_id)
+            self.notification_after_id = None
+        self.notification_canvas.delete("all")
+        self.notification_image = None
+        self.active_popup = None
+        self.notification_window.withdraw()
 
     def close(self) -> None:
         self.notification_queue.clear()
+        if self.notification_after_id is not None:
+            self.notification_window.after_cancel(self.notification_after_id)
+            self.notification_after_id = None
+        if self.notification_window.winfo_exists():
+            self.notification_window.destroy()
         self.audio.close_all()
 
 
@@ -1354,15 +1399,18 @@ def launch_gui() -> None:
 
     connect_tab = ttk.Frame(notebook)
     obs_tab = ttk.Frame(notebook)
+    window_presets_tab = ttk.Frame(notebook)
     points_tab = ttk.Frame(notebook)
     notification_tab = ttk.Frame(notebook)
 
     notebook.add(connect_tab, text="Connect")
     notebook.add(obs_tab, text="OBS Controls")
+    notebook.add(window_presets_tab, text="Window Presets")
     notebook.add(points_tab, text="Stream Points")
     notebook.add(notification_tab, text="Notification")
 
     obs_app = OBSGroupTogglerApp(obs_tab, connection_parent=connect_tab)
+    window_presets_app = OBSWindowPresetApp(window_presets_tab, obs_app)
     tracker_gui = TrackerGui(points_tab, root, connect_parent=connect_tab)
     notification_panel = NotificationPanel(notification_tab, root)
     tracker_gui.obs_app = obs_app

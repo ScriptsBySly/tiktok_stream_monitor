@@ -1,9 +1,12 @@
+import json
 import tkinter as tk
+from pathlib import Path
 from tkinter import ttk, messagebox
 import random
 import obsws_python as obs
 
 REWARD_ITEMS = [
+    "Guest_group",
     "Groupe_camera",
     "Groupe_game_full",
     "Groupe_game_half",
@@ -22,6 +25,27 @@ SPAM_ITEMS = [
 ]
 
 SPAM_GROUP_NAME = "SPAM"
+WINDOW_PRESET_ITEMS = [
+    "Groupe_game_full",
+    "Groupe_game_half",
+]
+WINDOW_PRESETS_PATH = Path("obs_window_presets.json")
+SETTABLE_TRANSFORM_KEYS = {
+    "alignment",
+    "boundsAlignment",
+    "boundsHeight",
+    "boundsType",
+    "boundsWidth",
+    "cropBottom",
+    "cropLeft",
+    "cropRight",
+    "cropTop",
+    "positionX",
+    "positionY",
+    "rotation",
+    "scaleX",
+    "scaleY",
+}
 
 CONTROLLED_ITEM_COLUMNS = [
     ("Reward Windows", REWARD_ITEMS),
@@ -29,6 +53,469 @@ CONTROLLED_ITEM_COLUMNS = [
 ]
 
 ALL_CONTROLLED_ITEMS = REWARD_ITEMS + SPAM_ITEMS
+
+
+class OBSWindowPresetApp:
+    def __init__(self, parent, obs_app):
+        self.parent = parent
+        self.obs_app = obs_app
+        self.presets = []
+        self.name_vars = []
+        self.status_var = tk.StringVar(value="Ready")
+        self.presets_frame = None
+
+        self.load_presets()
+        self.build_ui()
+
+    def build_ui(self):
+        main = ttk.Frame(self.parent, padding=12)
+        main.pack(fill="both", expand=True)
+        main.columnconfigure(0, weight=1)
+        main.rowconfigure(1, weight=1)
+
+        controls = ttk.LabelFrame(main, text="Window Presets", padding=10)
+        controls.grid(row=0, column=0, sticky="ew", pady=(0, 10))
+        controls.columnconfigure(1, weight=1)
+
+        ttk.Button(controls, text="Add", command=self.add_preset).grid(
+            row=0, column=0, sticky="w", padx=(0, 10)
+        )
+        ttk.Label(
+            controls,
+            text="Saves group placement plus child text, image, and game capture settings.",
+        ).grid(row=0, column=1, sticky="w")
+
+        list_frame = ttk.LabelFrame(main, text="Saved Presets", padding=10)
+        list_frame.grid(row=1, column=0, sticky="nsew", pady=(0, 10))
+        list_frame.columnconfigure(0, weight=1)
+        list_frame.rowconfigure(0, weight=1)
+
+        canvas = tk.Canvas(list_frame, highlightthickness=0)
+        scrollbar = ttk.Scrollbar(list_frame, orient="vertical", command=canvas.yview)
+        self.presets_frame = ttk.Frame(canvas)
+        self.presets_frame.columnconfigure(0, weight=1)
+
+        self.presets_frame.bind(
+            "<Configure>",
+            lambda _event: canvas.configure(scrollregion=canvas.bbox("all")),
+        )
+        canvas_window = canvas.create_window((0, 0), window=self.presets_frame, anchor="nw")
+        canvas.bind(
+            "<Configure>",
+            lambda event: canvas.itemconfigure(canvas_window, width=event.width),
+        )
+        canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.grid(row=0, column=0, sticky="nsew")
+        scrollbar.grid(row=0, column=1, sticky="ns")
+
+        ttk.Label(main, textvariable=self.status_var).grid(row=2, column=0, sticky="w")
+        self.refresh_preset_rows()
+
+    def load_presets(self):
+        if not WINDOW_PRESETS_PATH.exists():
+            self.presets = []
+            return
+
+        try:
+            payload = json.loads(WINDOW_PRESETS_PATH.read_text(encoding="utf-8"))
+            presets = payload.get("presets", []) if isinstance(payload, dict) else []
+            self.presets = [
+                preset
+                for preset in presets
+                if isinstance(preset, dict)
+                and isinstance(preset.get("items"), dict)
+                and isinstance(preset.get("name"), str)
+            ]
+        except Exception:
+            self.presets = []
+
+    def save_presets(self):
+        payload = {"presets": self.presets}
+        WINDOW_PRESETS_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+    def get_client(self):
+        client = getattr(self.obs_app, "client", None)
+        if client is None:
+            raise RuntimeError("Not connected to OBS.")
+        return client
+
+    def capture_item_state(self, scene_name, item_name):
+        client = self.get_client()
+        items = self.obs_app.get_scene_items_by_name(scene_name)
+        item_info = items.get(item_name)
+        if not item_info:
+            return None
+
+        container_name = item_info["containerName"]
+        item_id = item_info["sceneItemId"]
+        transform_resp = client.get_scene_item_transform(
+            scene_name=container_name,
+            item_id=item_id,
+        )
+
+        state = {
+            "containerName": container_name,
+            "sceneItemEnabled": bool(item_info.get("sceneItemEnabled")),
+            "sceneItemTransform": dict(transform_resp.scene_item_transform),
+        }
+
+        try:
+            state["sceneItemLocked"] = bool(
+                client.get_scene_item_locked(scene_name=container_name, item_id=item_id).scene_item_locked
+            )
+        except Exception:
+            pass
+
+        try:
+            state["sceneItemBlendMode"] = client.get_scene_item_blend_mode(
+                scene_name=container_name,
+                item_id=item_id,
+            ).scene_item_blend_mode
+        except Exception:
+            pass
+
+        try:
+            state["sceneItemIndex"] = int(
+                client.get_scene_item_index(scene_name=container_name, item_id=item_id).scene_item_index
+            )
+        except Exception:
+            pass
+
+        state["groupItems"] = self.capture_group_items(item_name)
+
+        return state
+
+    def capture_group_items(self, group_name):
+        client = self.get_client()
+        group_items = []
+
+        try:
+            group_resp = client.get_group_scene_item_list(group_name)
+        except Exception:
+            return group_items
+
+        for item in group_resp.scene_items:
+            source_name = item.get("sourceName")
+            item_id = item.get("sceneItemId")
+            if not source_name or item_id is None:
+                continue
+
+            child_state = {
+                "sourceName": source_name,
+                "sceneItemEnabled": bool(item.get("sceneItemEnabled")),
+            }
+
+            try:
+                transform_resp = client.get_scene_item_transform(
+                    scene_name=group_name,
+                    item_id=item_id,
+                )
+                child_state["sceneItemTransform"] = dict(transform_resp.scene_item_transform)
+            except Exception:
+                pass
+
+            try:
+                settings_resp = client.get_input_settings(source_name)
+                child_state["inputKind"] = settings_resp.input_kind
+                child_state["inputSettings"] = dict(settings_resp.input_settings)
+            except Exception:
+                pass
+
+            group_items.append(child_state)
+
+        return group_items
+
+    def add_preset(self):
+        try:
+            scene_name = self.obs_app.get_current_scene_name()
+            items = {}
+            missing = []
+
+            for item_name in WINDOW_PRESET_ITEMS:
+                state = self.capture_item_state(scene_name, item_name)
+                if state is None:
+                    missing.append(item_name)
+                else:
+                    items[item_name] = state
+
+            if missing:
+                messagebox.showwarning(
+                    "Items Not Found",
+                    "These items were not found in the current scene:\n\n" + "\n".join(missing),
+                    parent=self.parent,
+                )
+
+            if not items:
+                self.status_var.set("No preset saved")
+                return
+
+            preset_number = len(self.presets) + 1
+            self.presets.append(
+                {
+                    "name": f"Preset {preset_number}",
+                    "sceneName": scene_name,
+                    "version": 2,
+                    "items": items,
+                }
+            )
+            self.save_presets()
+            self.refresh_preset_rows()
+            self.status_var.set(f"Preset {preset_number} saved")
+        except Exception as error:
+            messagebox.showerror("Preset Error", f"Failed to add preset.\n\n{error}", parent=self.parent)
+
+    def refresh_preset_rows(self):
+        if self.presets_frame is None:
+            return
+
+        for child in self.presets_frame.winfo_children():
+            child.destroy()
+
+        self.name_vars = []
+
+        if not self.presets:
+            ttk.Label(self.presets_frame, text="No presets saved yet.").grid(
+                row=0,
+                column=0,
+                sticky="w",
+                padx=4,
+                pady=4,
+            )
+            return
+
+        for row_index, preset in enumerate(self.presets):
+            row = ttk.Frame(self.presets_frame)
+            row.grid(row=row_index, column=0, sticky="ew", pady=4)
+            row.columnconfigure(0, weight=1)
+
+            name_var = tk.StringVar(value=str(preset.get("name", f"Preset {row_index + 1}")))
+            self.name_vars.append(name_var)
+
+            entry = ttk.Entry(row, textvariable=name_var)
+            entry.grid(row=0, column=0, sticky="ew", padx=(0, 8))
+            entry.bind("<FocusOut>", lambda _event, index=row_index: self.rename_preset(index))
+            entry.bind("<Return>", lambda _event, index=row_index: self.rename_preset(index))
+
+            ttk.Button(row, text="Set", command=lambda index=row_index: self.set_preset(index)).grid(
+                row=0,
+                column=1,
+                sticky="e",
+                padx=(0, 8),
+            )
+            ttk.Button(row, text="Remove", command=lambda index=row_index: self.remove_preset(index)).grid(
+                row=0,
+                column=2,
+                sticky="e",
+            )
+
+    def rename_preset(self, index):
+        if index >= len(self.presets) or index >= len(self.name_vars):
+            return
+
+        new_name = self.name_vars[index].get().strip() or f"Preset {index + 1}"
+        self.name_vars[index].set(new_name)
+        self.presets[index]["name"] = new_name
+
+        try:
+            self.save_presets()
+            self.status_var.set(f"Renamed preset: {new_name}")
+        except Exception as error:
+            messagebox.showerror("Preset Error", f"Failed to save preset name.\n\n{error}", parent=self.parent)
+
+    def remove_preset(self, index):
+        if index >= len(self.presets):
+            return
+
+        preset_name = str(self.presets[index].get("name", f"Preset {index + 1}"))
+        confirmed = messagebox.askyesno(
+            "Remove Preset",
+            f'Remove "{preset_name}"?',
+            parent=self.parent,
+        )
+        if not confirmed:
+            return
+
+        try:
+            del self.presets[index]
+            self.save_presets()
+            self.refresh_preset_rows()
+            self.status_var.set(f"Removed preset: {preset_name}")
+        except Exception as error:
+            messagebox.showerror("Preset Error", f"Failed to remove preset.\n\n{error}", parent=self.parent)
+
+    def get_settable_transform(self, transform):
+        settable_transform = {
+            key: value
+            for key, value in transform.items()
+            if key in SETTABLE_TRANSFORM_KEYS
+        }
+
+        for bounds_key in ("boundsWidth", "boundsHeight"):
+            try:
+                bounds_value = float(settable_transform.get(bounds_key, 1))
+            except (TypeError, ValueError):
+                bounds_value = 0
+
+            if bounds_value < 1:
+                settable_transform.pop(bounds_key, None)
+
+        return settable_transform
+
+    def get_group_items_by_source_name(self, group_name):
+        client = self.get_client()
+        result = {}
+
+        try:
+            group_resp = client.get_group_scene_item_list(group_name)
+        except Exception:
+            return result
+
+        for item in group_resp.scene_items:
+            source_name = item.get("sourceName")
+            item_id = item.get("sceneItemId")
+            if source_name and item_id is not None:
+                result[source_name] = {
+                    "sceneItemId": item_id,
+                    "sceneItemEnabled": item.get("sceneItemEnabled"),
+                }
+
+        return result
+
+    def restore_group_items(self, group_name, saved_group_items):
+        if not isinstance(saved_group_items, list):
+            return []
+
+        client = self.get_client()
+        current_group_items = self.get_group_items_by_source_name(group_name)
+        missing = []
+
+        for saved_child in saved_group_items:
+            if not isinstance(saved_child, dict):
+                continue
+
+            source_name = str(saved_child.get("sourceName", "")).strip()
+            if not source_name:
+                continue
+
+            current_child = current_group_items.get(source_name)
+            if not current_child:
+                missing.append(source_name)
+                continue
+
+            input_settings = saved_child.get("inputSettings")
+            if isinstance(input_settings, dict):
+                client.set_input_settings(
+                    name=source_name,
+                    settings=input_settings,
+                    overlay=False,
+                )
+
+            item_id = current_child["sceneItemId"]
+            transform = saved_child.get("sceneItemTransform", {})
+            if isinstance(transform, dict):
+                settable_transform = self.get_settable_transform(transform)
+                client.set_scene_item_transform(
+                    scene_name=group_name,
+                    item_id=item_id,
+                    transform=settable_transform,
+                )
+
+            client.set_scene_item_enabled(
+                scene_name=group_name,
+                item_id=item_id,
+                enabled=bool(saved_child.get("sceneItemEnabled", True)),
+            )
+
+        return missing
+
+    def set_preset(self, index):
+        if index >= len(self.presets):
+            return
+
+        try:
+            client = self.get_client()
+            scene_name = self.obs_app.get_current_scene_name()
+            current_items = self.obs_app.get_scene_items_by_name(scene_name)
+            preset = self.presets[index]
+            missing = []
+            outdated = []
+
+            for item_name in WINDOW_PRESET_ITEMS:
+                saved_state = preset.get("items", {}).get(item_name)
+                current_info = current_items.get(item_name)
+
+                if not isinstance(saved_state, dict) or not current_info:
+                    missing.append(item_name)
+                    continue
+
+                container_name = current_info["containerName"]
+                item_id = current_info["sceneItemId"]
+                transform = saved_state.get("sceneItemTransform", {})
+
+                if isinstance(transform, dict):
+                    settable_transform = self.get_settable_transform(transform)
+                    client.set_scene_item_transform(
+                        scene_name=container_name,
+                        item_id=item_id,
+                        transform=settable_transform,
+                    )
+
+                if "sceneItemBlendMode" in saved_state:
+                    client.set_scene_item_blend_mode(
+                        scene_name=container_name,
+                        item_id=item_id,
+                        blend=saved_state["sceneItemBlendMode"],
+                    )
+
+                if "sceneItemLocked" in saved_state:
+                    client.set_scene_item_locked(
+                        scene_name=container_name,
+                        item_id=item_id,
+                        locked=bool(saved_state["sceneItemLocked"]),
+                    )
+
+                if "sceneItemIndex" in saved_state:
+                    client.set_scene_item_index(
+                        scene_name=container_name,
+                        item_id=item_id,
+                        item_index=int(saved_state["sceneItemIndex"]),
+                    )
+
+                client.set_scene_item_enabled(
+                    scene_name=container_name,
+                    item_id=item_id,
+                    enabled=bool(saved_state.get("sceneItemEnabled", True)),
+                )
+                if "groupItems" not in saved_state:
+                    outdated.append(item_name)
+                else:
+                    missing.extend(
+                        f"{item_name} / {source_name}"
+                        for source_name in self.restore_group_items(
+                            item_name,
+                            saved_state.get("groupItems", []),
+                        )
+                    )
+
+            self.obs_app.refresh_items_state(scene_name)
+            preset_name = str(preset.get("name", f"Preset {index + 1}"))
+            self.status_var.set(f"Set preset: {preset_name}")
+
+            if missing:
+                messagebox.showwarning(
+                    "Items Not Found",
+                    "These preset items were not found in the current scene:\n\n" + "\n".join(missing),
+                    parent=self.parent,
+                )
+            if outdated:
+                messagebox.showwarning(
+                    "Preset Needs Re-Save",
+                    "This preset was saved before child source settings were supported.\n\n"
+                    "Click Add to save a new preset with the current group contents.",
+                    parent=self.parent,
+                )
+        except Exception as error:
+            messagebox.showerror("Preset Error", f"Failed to set preset.\n\n{error}", parent=self.parent)
 
 
 
